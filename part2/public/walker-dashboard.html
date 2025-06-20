@@ -51,7 +51,7 @@
         try {
           const res = await fetch('/api/users/me', { credentials: 'include' });
           if (!res.ok) throw new Error('Not logged in');
-          return await res.json(); 
+          return await res.json();
         } catch (err) {
           throw new Error('Failed to fetch user info');
         }
@@ -67,13 +67,15 @@
       }
 
 
-      async function applyToWalk(requestId) {
-        try {
-          const res = await fetch(`/api/walks/${requestId}/apply`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ walker_id: user })
-          });
+async function applyToWalk(requestId) {
+  try {
+    const currentUser = await getCurrentUser();
+
+    const res = await fetch(`/api/walks/${requestId}/apply`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ walker_id: currentUser.user_id })
+    });
           const result = await res.json();
 
           if (!res.ok) throw new Error(result.error || 'Application failed');
