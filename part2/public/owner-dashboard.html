@@ -110,7 +110,7 @@
           message.value = result.message;
           error.value = '';
 
-          // Reset form
+          
           form.value = {
             dog_id: '',
             requested_time: '',
@@ -118,7 +118,7 @@
             location: ''
           };
 
-          // Reload walk requests
+
           loadWalks();
         } catch (err) {
           error.value = err.message;
@@ -126,7 +126,7 @@
         }
       }
 
-      // ✅ Logout function
+
       async function logout() {
         try {
           const res = await fetch('/api/users/logout', {
@@ -153,7 +153,7 @@
         message,
         error,
         submitWalkRequest,
-        logout  // ✅ included here for button use
+        logout
       };
     }
   }).mount('#app');
