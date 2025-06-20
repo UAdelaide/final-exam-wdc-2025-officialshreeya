@@ -43,7 +43,7 @@ router.post('/register', async (req, res) => {
 
 router.get('/me', (req, res) => {
   if (!req.session.user) {
-    return res.status(401).json({ error: 'Not logged in' });
+    return res.status(401).json({ error: 'not logged in' });
   }
   res.json(req.session.user);
 });
@@ -75,7 +75,7 @@ router.post('/logout', (req, res) => {
     }
 
     res.clearCookie('connect.sid');
-    res.json({ message: 'Logged out successfully' });
+    res.json({ message: 'Loggedout successfully' });
   });
 });
 router.get('/dogs/all', async (req, res) => {
