@@ -16,9 +16,9 @@ let db;
       password: '',
       database: 'DogWalkService'
     });
-    console.log('✅ Connected to DogWalkService database');
+    console.log('Connected to DogWalkService database');
   } catch (err) {
-    console.error('❌ DB connection error:', err);
+    console.error('DB connection error:', err);
   }
 })();
 
@@ -35,8 +35,6 @@ app.get('/api/dogs', async (req, res) => {
     res.status(500).json({ error: 'Failed to fetch dogs' });
   }
 });
-
-// Start server
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
