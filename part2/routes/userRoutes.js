@@ -13,6 +13,13 @@ router.get('/', async (req, res) => {
     res.status(500).json({ error: 'Failed to fetch users' });
   }
 });
+router.get('/owner-dashboard', (req, res) => {
+  res.send('Welcome to Owner Dashboard!');
+});
+
+router.get('/walker-dashboard', (req, res) => {
+  res.send('Welcome to Walker Dashboard!');
+});
 
 // POST a new user (simple signup)
 router.post('/register', async (req, res) => {
