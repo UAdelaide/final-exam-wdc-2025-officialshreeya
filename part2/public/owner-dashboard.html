@@ -122,7 +122,7 @@
           });
 
           const result = await res.json();
-          if (!res.ok) throw new Error(result.error || 'error submitting walk request');
+          if (!res.ok) throw new Error(result.error || 'error in submitting walk requests');
 
           message.value = result.message;
           error.value = '';
