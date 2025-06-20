@@ -14,7 +14,15 @@ app.use(session({
   resave: false,
   saveUninitialized: true
 }));
-
+(async () => {
+  try {
+    const db = await mysql.createConnection({
+      host: 'localhost',
+      user: 'root',
+      password: '',
+      database: 'DogWalkService'
+    });
+    console.log('Connected to DogWalkService database');
 // Routes
 const walkRoutes = require('./routes/walkRoutes');
 const userRoutes = require('./routes/userRoutes');
