@@ -49,11 +49,11 @@
           const data = await response.json();
 
           if (!response.ok) {
-            this.error = data.error || 'Login failed';
+            this.error = data.error ||'Login failed';
             return;
           }
 
-          // Redirect based on user role
+
           if (data.user.role === 'owner') {
             window.location.href = 'owner-dashboard.html';
           } else if (data.user.role === 'walker') {
