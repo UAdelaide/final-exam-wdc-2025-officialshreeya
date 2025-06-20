@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dog of the Day - Chaos Edition</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <style>
+    body {
+      background: linear-gradient(to right, red, blue, green, yellow);
+      font-family: 'Comic Sans MS', cursive;
+      animation: blink 0.3s infinite;
+    }
+
+    @keyframes blink {
+      0% { background-color: black; }
+      50% { background-color: white; }
+      100% { background-color: black; }
+    }
+
+    .dog-pic {
+      border: 10px dashed lime;
+      transform: rotate(5deg);
+      width: 400px;
+      height: 400px;
+    }
+
+    .button {
+      font-size: 24px;
+      padding: 20px;
+      background-color: purple;
+      color: yellow;
+      border-radius: 50%;
+      cursor: none; /* hides pointer */
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <h1>✨ Welcome to Dog of the Day!! ✨</h1>
+    <button class="button" @click="getDog">CLICK FAST FOR DOG</button>
+    <div v-if="dogImage">
+      <h2 style="color: cyan;">His name is {{ dogName }} and he is our KING.</h2>
+      <img :src="dogImage" alt="" class="dog-pic">
+    </div>
+    <marquee>Dogs are great. Dogs are cool. Scroll to find more dogs! Dogs dogs dogs.</marquee>
+  </div>
+
+  <script>
+    const { createApp } = Vue;
+
+    createApp({
+      data() {
+        return {
+          dogImage: '',
+          dogName: 'Sir Woofs-a-Lot'
+        };
+      },
+      methods: {
+        async getDog() {
+          const res = await fetch('https://dog.ceo/api/breeds/image/random');
+          const data = await res.json();
+          this.dogImage = data.message;
+        }
+      },
+      mounted() {
+        this.getDog();
+      }
+    }).mount('#app');
+  </script>
+</body>
+</html>
