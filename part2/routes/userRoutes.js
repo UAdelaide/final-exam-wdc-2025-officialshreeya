@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const db = require('../models/db');
 
 // GET all users (for admin/testing)
 router.get('/', async (req, res) => {
   try {
-    const [rows] = await req.db.query('SELECT user_id, username, email, role FROM Users');
+    const [rows] = await db.query('SELECT user_id, username, email, role FROM Users');
     res.json(rows);
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch users' });
@@ -16,7 +17,7 @@ router.post('/register', async (req, res) => {
   const { username, email, password, role } = req.body;
 
   try {
-    const [result] = await req.db.query(`
+    const [result] = await db.query(`
       INSERT INTO Users (username, email, password_hash, role)
       VALUES (?, ?, ?, ?)
     `, [username, email, password, role]);
@@ -33,34 +34,23 @@ router.get('/me', (req, res) => {
   }
   res.json(req.session.user);
 });
+
 // POST login (dummy version)
 router.post('/login', async (req, res) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
 
   try {
-    const [rows] = await req.db.query(`
+    const [rows] = await db.query(`
       SELECT user_id, username, role FROM Users
-      WHERE username = ? AND password_hash = ?
-    `, [username, password]);
+      WHERE email = ? AND password_hash = ?
+    `, [email, password]);
 
     if (rows.length === 0) {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
 
-    req.session.user = {
-      id: rows[0].user_id,
-      username: rows[0].username,
-      role: rows[0].role
-    };
-
-    if (rows[0].role === 'owner') {
-      return res.redirect('/owner-dashboard.html');
-    } else {
-      return res.redirect('/walker-dashboard.html');
-    }
-
+    res.json({ message: 'Login successful', user: rows[0] });
   } catch (error) {
-    console.error(error);
     res.status(500).json({ error: 'Login failed' });
   }
 });
