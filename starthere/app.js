@@ -20,27 +20,51 @@ let db;
       host: 'localhost',
       user: 'root',
       password: '' // Set your MySQL root password
-      database: 'DogWalkService'
     });
 
-    console.log('Connected to DogWalkService DB');
+    // Create the database if it doesn't exist
+    await connection.query('CREATE DATABASE IF NOT EXISTS testdb');
+    await connection.end();
+
+    // Now connect to the created database
+    db = await mysql.createConnection({
+      host: 'localhost',
+      user: 'root',
+      password: '',
+      database: 'testdb'
+    });
+
+    // Create a table if it doesn't exist
+    await db.execute(`
+      CREATE TABLE IF NOT EXISTS books (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        title VARCHAR(255),
+        author VARCHAR(255)
+      )
+    `);
+
+    // Insert data if table is empty
+    const [rows] = await db.execute('SELECT COUNT(*) AS count FROM books');
+    if (rows[0].count === 0) {
+      await db.execute(`
+        INSERT INTO books (title, author) VALUES
+        ('1984', 'George Orwell'),
+        ('To Kill a Mockingbird', 'Harper Lee'),
+        ('Brave New World', 'Aldous Huxley')
+      `);
+    }
   } catch (err) {
-    console.error('Error connecting to DogWalkService. Is MySQL running?', err);
+    console.error('Error setting up database. Ensure Mysql is running: service mysql start', err);
   }
 })();
 
-z
-app.get('/api/dogs', async (req, res) => {
+// Route to return books as JSON
+app.get('/', async (req, res) => {
   try {
-    const [rows] = await db.execute(`
-      SELECT d.name AS dog_name, d.size, u.username AS owner_username
-      FROM Dogs d
-      JOIN Users u ON d.owner_id = u.user_id
-    `);
-    res.json(rows);
+    const [books] = await db.execute('SELECT * FROM books');
+    res.json(books);
   } catch (err) {
-    console.error('Error fetching dogs:', err);
-    res.status(500).json({ error: 'Failed to fetch dogs' });
+    res.status(500).json({ error: 'Failed to fetch books' });
   }
 });
 
