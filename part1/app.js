@@ -72,8 +72,8 @@ app.get('/api/walkers/summary', async (req, res) => {
     `);
     res.json(rows);
   } catch (err) {
-    console.error('Error fetching walker summary:', err);
-    res.status(500).json({ error: 'Failed to fetch summary' });
+    console.error('Error fetching walker summmary:', err);
+    res.status(500).json({ error: 'Failed to fetch summmary' });
   }
 });
 app.listen(PORT, () => {
