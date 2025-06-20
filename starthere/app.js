@@ -15,10 +15,11 @@ let db;
 
 (async () => {
   try {
-    db = await mysql.createConnection({
+    // Connect to MySQL without specifying a database
+    const connection = await mysql.createConnection({
       host: 'localhost',
       user: 'root',
-      password: '',
+      password: '' // Set your MySQL root password
       database: 'DogWalkService'
     });
 
@@ -28,6 +29,7 @@ let db;
   }
 })();
 
+z
 app.get('/api/dogs', async (req, res) => {
   try {
     const [rows] = await db.execute(`
