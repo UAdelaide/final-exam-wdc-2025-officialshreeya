@@ -103,8 +103,7 @@
           const res = await fetch('/api/users/me', {
             credentials: 'include'
           });
-
-    const currentUser = await res.json();
+          const currentUser = await res.json();
 
     const dogRes = await fetch(`/api/dogs?owner_id=${currentUser.user_id}`);
     if (!dogRes.ok) throw new Error('Could not fetch dogs');
