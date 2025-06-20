@@ -101,8 +101,8 @@
       async function loadDogs() {
         try {
           const res = await fetch('/api/users/me', {
-      credentials: 'include'
-    });
+            credentials: 'include'
+          });
 
     const currentUser = await res.json();
 
