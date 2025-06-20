@@ -38,7 +38,6 @@ app.use(session({
     app.use('/api/walks', walkRoutes);
     app.use('/api/users', userRoutes);
 
-    // No app.listen here because you're exporting app
   } catch (err) {
     console.error('Error connecting to DB:', err);
   }
