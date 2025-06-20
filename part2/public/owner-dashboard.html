@@ -108,7 +108,7 @@
           if (!dogRes.ok) throw new Error('unble to fetch dogs');
           dogs.value = await dogRes.json();
         } catch (err) {
-          error.value = 'Failed to load your dogs';
+          error.value = 'failed to load your dogs';
         }
       }
 
@@ -122,7 +122,7 @@
           });
 
           const result = await res.json();
-          if (!res.ok) throw new Error(result.error || 'Error submitting walk request');
+          if (!res.ok) throw new Error(result.error || 'error submitting walk request');
 
           message.value = result.message;
           error.value = '';
