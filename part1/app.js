@@ -28,7 +28,7 @@ app.get('/api/dogs', async (req, res) => {
     `);
     res.json(rows);
   } catch (err) {
-    res.status(500).json({ error: 'Failed to fetch dogs' });
+    res.status(500).json({ error: 'failedto fetch dogs' });
   }
 });
 app.get('/api/walkrequests/open', async (req, res) => {
