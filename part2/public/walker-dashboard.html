@@ -53,7 +53,7 @@
           if (!res.ok) throw new Error('Not logged in');
           return await res.json();
         } catch (err) {
-          throw new Error('Failed to fetch user info');
+          throw new Error('failed to fetch userinfo');
         }
       }
       async function loadWalkRequests() {
