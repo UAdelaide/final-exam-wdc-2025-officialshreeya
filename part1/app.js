@@ -72,7 +72,7 @@ app.get('/api/walkers/summary', async (req, res) => {
     `);
     res.json(rows);
   } catch (err) {
-    console.error('eRror fetching walker summmary:', err);
+    console.error('errror fetching walker summmary', err);
     res.status(500).json({ error: 'Failed to fetch summmary' });
   }
 });
