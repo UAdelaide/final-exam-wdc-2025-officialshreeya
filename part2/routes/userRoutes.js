@@ -11,6 +11,16 @@ router.get('/', async (req, res) => {
     res.status(500).json({ error: 'Failed to fetch users' });
   }
 });
+router.get('/dogs', async (req, res) => {
+  const { owner_id } = req.query;
+
+  try {
+    const [rows] = await db.query('SELECT dog_id, name FROM Dogs WHERE owner_id = ?', [owner_id]);
+    res.json(rows);
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to fetch dogs' });
+  }
+});
 
 // POST a new user (simple signup)
 router.post('/register', async (req, res) => {
@@ -61,7 +71,7 @@ router.post('/logout', (req, res) => {
       return res.status(500).json({ error: 'Logout failed' });
     }
 
-    res.clearCookie('connect.sid'); 
+    res.clearCookie('connect.sid');
     res.json({ message: 'Logged out successfully' });
   });
 });
