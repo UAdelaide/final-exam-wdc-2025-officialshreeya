@@ -43,9 +43,9 @@
       const walks = ref([]);
       const message = ref('');
       const error = ref('');
-      const user = 3; // dummy walker_id
+      const user = 3; 
 
-      // Load all walk requests
+
       async function loadWalkRequests() {
         try {
           const res = await fetch('/api/walks');
@@ -56,7 +56,7 @@
         }
       }
 
-      // Apply to a walk request
+
       async function applyToWalk(requestId) {
         try {
           const res = await fetch(`/api/walks/${requestId}/apply`, {
@@ -76,7 +76,7 @@
         }
       }
 
-      // ✅ Logout function
+
       async function logout() {
         try {
           const res = await fetch('/api/users/logout', {
@@ -102,7 +102,7 @@
         message,
         error,
         applyToWalk,
-        logout  
+        logout
       };
     }
   }).mount('#app');
