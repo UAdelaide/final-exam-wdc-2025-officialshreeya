@@ -45,9 +45,17 @@
       const walks = ref([]);
       const message = ref('');
       const error = ref('');
-      
 
 
+      async function getCurrentUser() {
+        try {
+          const res = await fetch('/api/users/me', { credentials: 'include' });
+          if (!res.ok) throw new Error('Not logged in');
+          return await res.json(); // { user_id, username, role }
+        } catch (err) {
+          throw new Error('Failed to fetch user info');
+        }
+      }
       async function loadWalkRequests() {
         try {
           const res = await fetch('/api/walks');
