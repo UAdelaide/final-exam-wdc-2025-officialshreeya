@@ -4,7 +4,6 @@ const db = require('../models/db');
 
 // GET all users (for admin/testing)
 router.get('/', async (req, res) => {
-  const { username, password } = req.body;
   try {
     const [rows] = await db.query('SELECT user_id, username, email, role FROM Users');
     res.json(rows);
