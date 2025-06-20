@@ -23,7 +23,9 @@ app.use(session({
       password: '',
       database: 'DogWalkService'
     });
+
     console.log('Connected to DogWalkService database');
+
     app.use((req, res, next) => {
       req.db = db;
       next();
