@@ -1,13 +1,9 @@
 const express = require('express');
 const mysql = require('mysql2/promise');
-
 const app = express();
 const PORT = 8080;
-
 app.use(express.json());
-
 let db;
-
 (async () => {
   try {
     db = await mysql.createConnection({
@@ -21,7 +17,6 @@ let db;
     console.error('DB connection error:', err);
   }
 })();
-
 // /api/dogs route
 app.get('/api/dogs', async (req, res) => {
   try {
