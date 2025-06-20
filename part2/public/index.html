@@ -9,23 +9,23 @@
 </head>
 <body class="bg-light">
 
-  <div id="app" class="container py-5">
-    <h1 class="mb-4 text-primary">{{ message }}</h1>
-    <p class="lead">Connect with trusted walkers for your beloved dog!</p>
+<div id="app" class="container py-5">
+  <h1 class="mb-4 text-primary">{{ message }}</h1>
+  <p class="lead">Connect with trusted walkers for your beloved dog!</p>
 
-    <form @submit.prevent="login">
-      <div class="mb-3">
-        <label for="email" class="form-label">Email</label>
-        <input type="email" v-model="email" class="form-control" required />
-      </div>
-      <div class="mb-3">
-        <label for="password" class="form-label">Password</label>
-        <input type="password" v-model="password" class="form-control" required />
-      </div>
-      <button type="submit" class="btn btn-primary">Log In</button>
-      <p class="text-danger mt-2" v-if="error">{{ error }}</p>
-    </form>
-  </div>
+  <form @submit.prevent="login">
+    <div class="mb-3">
+      <label for="username" class="form-label">Username</label>
+      <input type="text" v-model="username" class="form-control" required />
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input type="password" v-model="password" class="form-control" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Log In</button>
+    <p class="text-danger mt-2" v-if="error">{{ error }}</p>
+  </form>
+</div>
 <script>
   const { createApp } = Vue;
   createApp({
