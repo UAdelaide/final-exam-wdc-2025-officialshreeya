@@ -88,7 +88,6 @@
       const error = ref('');
       const dogs = ref([]);
 
-      // Load existing walk requests
       async function loadWalks() {
         try {
           const res = await fetch('/api/walks');
@@ -112,7 +111,7 @@
         }
       }
 
-      // Submit new walk request
+    
       async function submitWalkRequest() {
         try {
           const res = await fetch('/api/walks', {
