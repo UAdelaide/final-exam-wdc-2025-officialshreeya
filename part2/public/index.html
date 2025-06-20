@@ -51,7 +51,8 @@
         message: 'Welcome to the Dog Walking Service!',
         username: '',
         password: '',
-        error: ''
+        error: '',
+        dogs: []  
       };
     },
     methods: {
@@ -66,10 +67,9 @@
           const data = await response.json();
 
           if (!response.ok) {
-            this.error = data.error ||'Login failed';
+            this.error = data.error || 'Login failed';
             return;
           }
-
 
           if (data.user.role === 'owner') {
             window.location.href = 'owner-dashboard.html';
@@ -81,6 +81,24 @@
         } catch (err) {
           this.error = 'Login error occurred';
         }
+      }
+    },
+    async mounted() {
+      try {
+        const res = await fetch('/api/users/dogs/all');
+        const dogList = await res.json();
+
+        const dogsWithPhotos = await Promise.all(
+          dogList.map(async (dog) => {
+            const imgRes = await fetch('https://dog.ceo/api/breeds/image/random');
+            const imgData = await imgRes.json();
+            return { ...dog, photo: imgData.message };
+          })
+        );
+
+        this.dogs = dogsWithPhotos;
+      } catch (err) {
+        console.error('Error loading dogs:', err);
       }
     }
   }).mount('#app');
