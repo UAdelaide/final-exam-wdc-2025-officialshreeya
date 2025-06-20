@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-
 module.exports = (db) => {
   router.get('/dogs', async (req, res) => {
     try {
@@ -15,6 +14,5 @@ module.exports = (db) => {
       res.status(500).json({ error: 'Failed to fetch dogs' });
     }
   });
-
   return router;
 };
