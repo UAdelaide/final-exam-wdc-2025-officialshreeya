@@ -23,6 +23,10 @@ app.use(session({
       database: 'DogWalkService'
     });
     console.log('Connected to DogWalkService database');
+    app.use((req, res, next) => {
+      req.db = db;
+      next();
+    });
 // Routes
 const walkRoutes = require('./routes/walkRoutes');
 const userRoutes = require('./routes/userRoutes');
