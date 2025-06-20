@@ -23,11 +23,26 @@ app.use(session({
       password: '',
       database: 'DogWalkService'
     });
+
     console.log('Connected to DogWalkService database');
+
     app.use((req, res, next) => {
       req.db = db;
       next();
     });
+
+    // Routes
+    const walkRoutes = require('./routes/walkRoutes');
+    const userRoutes = require('./routes/userRoutes');
+
+    app.use('/api/walks', walkRoutes);
+    app.use('/api/users', userRoutes);
+
+    // No app.listen here because you're exporting app
+  } catch (err) {
+    console.error('Error connecting to DB:', err);
+  }
+})();
 // Routes
 const walkRoutes = require('./routes/walkRoutes');
 const userRoutes = require('./routes/userRoutes');
