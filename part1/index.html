@@ -81,12 +81,12 @@
             setTimeout(() => {
               dog.remove();
             }, 5000);
-          }, 300); 
+          }, 300);
         }
-      },
       },
       mounted() {
         this.getDog();
+        this.rainDogs();
       }
     }).mount('#app');
   </script>
