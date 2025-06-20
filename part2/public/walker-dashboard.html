@@ -10,6 +10,8 @@
 <body class="bg-light">
   <div id="app" class="container py-4">
     <h1 class="mb-4 text-success">Walker Dashboard</h1>
+    <button type="button" @click="logout" class="btn btn-outline-danger mb-4 float-end">Logout</button>
+<div class="clearfix"></div>
 
     <!-- Alert messages -->
     <div v-if="message" class="alert alert-info">{{ message }}</div>
@@ -43,7 +45,7 @@
       const walks = ref([]);
       const message = ref('');
       const error = ref('');
-      const user = 3; 
+      const user = 3;
 
 
       async function loadWalkRequests() {
