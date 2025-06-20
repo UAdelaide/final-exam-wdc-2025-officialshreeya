@@ -68,7 +68,22 @@
           const res = await fetch('https://dog.ceo/api/breeds/image/random');
           const data = await res.json();
           this.dogImage = data.message;
+        },
+        rainDogs() {
+          setInterval(() => {
+            const dog = document.createElement('div');
+            dog.classList.add('falling-dog');
+            dog.style.left = Math.random() * 100 + 'vw';
+            dog.innerText = '🐶';
+
+            document.body.appendChild(dog);
+
+            setTimeout(() => {
+              dog.remove();
+            }, 5000);
+          }, 300); // new dog every 300ms
         }
+      },
       },
       mounted() {
         this.getDog();
