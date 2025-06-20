@@ -105,7 +105,7 @@
           });
           const currentUser = await res.json();
           const dogRes = await fetch(`/api/users/dogs?owner_id=${currentUser.user_id}`);
-          if (!dogRes.ok) throw new Error('Could not fetch dogs');
+          if (!dogRes.ok) throw new Error('unble to fetch dogs');
           dogs.value = await dogRes.json();
         } catch (err) {
           error.value = 'Failed to load your dogs';
