@@ -74,9 +74,7 @@
             dog.classList.add('falling-dog');
             dog.style.left = Math.random() * 100 + 'vw';
             dog.innerText = '🐶';
-
             document.body.appendChild(dog);
-
             setTimeout(() => {
               dog.remove();
             }, 5000);
