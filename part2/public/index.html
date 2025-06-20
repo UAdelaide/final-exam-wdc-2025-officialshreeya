@@ -66,7 +66,7 @@
           });
           const data = await response.json();
           if (!response.ok) {
-            this.error = data.error || 'Login Failed';
+            this.error = data.error || 'Logins Failed';
             return;
           }
           if (data.user.role === 'owner') {
